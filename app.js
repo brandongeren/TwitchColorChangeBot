@@ -1,7 +1,7 @@
 var tmi = require('tmi.js')
 
-var user = "palakmathur";
-var chan = "brandongeren";
+var user = "";
+var chan = "";
 
 var options = {
 	options: {
@@ -13,7 +13,7 @@ var options = {
 	},
 	identity: {
 		username: user,
-		password: "oauth:fppunlb2kjkgs11qno4mikxbu7ug9t"
+		password: ""
 	},
 
 	channels: [chan]
