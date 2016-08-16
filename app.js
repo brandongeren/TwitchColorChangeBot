@@ -1,7 +1,7 @@
 var tmi = require('tmi.js')
 
-var user = "";
-var chan = "";
+var user = "palakmathur";
+var chan = "brandongeren";
 
 var options = {
 	options: {
@@ -13,9 +13,9 @@ var options = {
 	},
 	identity: {
 		username: user,
-		password: ""
+		password: "oauth:fppunlb2kjkgs11qno4mikxbu7ug9t"
 	},
-	// channels: {"grinninggoat"}
+
 	channels: [chan]
 };
 
@@ -41,6 +41,9 @@ colors.set(12, "SeaGreen");
 colors.set(13, "SpringGreen");
 colors.set(14, "YellowGreen");
 
+var color = -1;
+var lastColor = -1;
+
 
 var client = new tmi.client(options);
 client.connect();
@@ -48,10 +51,13 @@ client.connect();
 
 client.addListener("message", function (channel, userstate, message, self) {
 	// only listen to own messages
-	color = colors.get(getRandomIdx());
-	lastColor = color;
-	console.log(color);
-	// client.color(color);
-	client.say(chan, "/color " + color);
+	if (userstate["display-name"] == user) {
+		while (lastColor == color) {
+			color = colors.get(getRandomIdx());
+		}
+		lastColor = color;
+		client.color(color);
+	}
+
 });
 
